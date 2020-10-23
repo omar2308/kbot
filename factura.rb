@@ -20,6 +20,8 @@ class Factura
             @msg_error = "Cantidad debe ser un numero entero"
         when !(is_number? precio)
             @msg_error = "Precio debe ser un numero entero"
+        when !(['CA'].include? estado)
+            @msg_error = "Solo se envia a CA"
         else
             result = true
         end
