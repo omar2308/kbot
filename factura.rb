@@ -1,10 +1,11 @@
 class Factura
     def initialize(cantidad, precio, estado)
-        @impuesto_porc = 0.0825
+        @impuesto_estado = 0
         @precio = precio
         @cantidad = cantidad
         @dscto= 0
         @subtotal = 0
+        @total = 0
         @estado = estado
         
         @msg_error = ""
@@ -48,15 +49,30 @@ class Factura
         end
     end
 
+    def calcular_subtotal()
+        @subtotal = @cantidad*@precio
+    end
+
+    def calcular_impuesto()
+        case @estado
+        when 'CA'
+            @impuesto_estado=0.0825
+        end
+        @impuesto = @subtotal*@impuesto_estado
+    end
+
+    def calcular_total()
+        @total = @subtotal + @impuesto - @dscto
+    end
+
     def resultado()
         if (@calcular)
-            @subtotal = @cantidad*@precio
-            impuesto = @subtotal*@impuesto_porc
+            calcular_subtotal()
             calcular_dscto()
-
-            #puts "subtotal: #{@subtotal}, impuesto: #{impuesto}, dscto: #{@dscto}, estado: #{@estado}"
-            total = @subtotal + impuesto - @dscto
-            puts "#{total}"
+            calcular_impuesto()
+            calcular_total()
+            #puts "subtotal: #{@subtotal}, impuesto: #{@impuesto}, dscto: #{@dscto}, estado: #{@estado}"
+            puts "#{@total}"
         else
             puts "Error: #{@msg_error}"
         end
