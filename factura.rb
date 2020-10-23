@@ -19,8 +19,10 @@ class Factura
             @dscto = 0
         when 1000..5000
             @dscto = @subtotal*0.03
-        when 5000..
+        when 5000..7000
             @dscto = @subtotal*0.05
+        when 7000..
+            @dscto = @subtotal*0.07
         end
         puts "...dscto: #{@dscto}"
     end
