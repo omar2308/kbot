@@ -1,5 +1,5 @@
 class Factura
-    IMPUESTOS_ESTADOS = {'CA' => 0.0825, 'UT' => 0.0685, 'NV' => 0.0800}
+    IMPUESTOS_ESTADOS = {'CA' => 0.0825, 'UT' => 0.0685, 'NV' => 0.0800, 'TX' => 0.0625}
     def initialize(cantidad, precio, estado)
         @cantidad = cantidad
         @precio = precio
@@ -70,7 +70,7 @@ class Factura
             calcular_dscto()
             calcular_impuesto()
             calcular_total()
-            puts "subtotal: #{@subtotal}, impuesto: #{@impuesto}, dscto: #{@dscto}, estado: #{@estado}"
+            #puts "subtotal: #{@subtotal}, impuesto: #{@impuesto}, dscto: #{@dscto}, estado: #{@estado}"
             puts "#{@total}"
         else
             puts "Error: #{@msg_error}"
