@@ -1,14 +1,29 @@
 class Factura
     def initialize(cantidad, precio)
         @impuesto_porc = 0.0825
-        @precio = precio.to_i
+        @precio = precio
+        @cantidad = cantidad
         @dscto= 0
         @subtotal = 0
-
-        @cantidad = cantidad.to_i
-        @calcular = is_number?(cantidad)
+        
+        @msg_error = ""
+        @calcular = validar_cantidad_y_precio()
+        @precio = @precio.to_i
+        @cantidad = @cantidad.to_i
     end
 
+    def validar_cantidad_y_precio()
+        result = false;
+        case
+        when !(is_number? @cantidad)
+            @msg_error = "Cantidad debe ser un numero entero"
+        when !(is_number? @precio)
+            @msg_error = "Precio debe ser un numero entero"
+        else
+            result = true
+        end
+        return result
+    end
     def is_number?(obj)
         return true if Integer(obj) rescue false
     end
@@ -36,11 +51,11 @@ class Factura
             impuesto = @subtotal*@impuesto_porc
             calcular_dscto()
 
-            #puts "subtotal: #{@subtotal}, impuesto: #{impuesto}, dscto: #{@dscto}"
+            puts "subtotal: #{@subtotal}, impuesto: #{impuesto}, dscto: #{@dscto}"
             total = @subtotal + impuesto - @dscto
             puts "#{total}"
         else
-            puts "Error: cantidad debe ser entero"
+            puts "Error: #{@msg_error}"
         end
     end
 end
