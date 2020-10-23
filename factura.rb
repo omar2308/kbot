@@ -6,6 +6,7 @@ class Factura
         @estado = estado
 
         @impuesto_estado = 0
+        @dscto_rango = 0;
         @dscto= 0
         @subtotal = 0
         @total = 0
@@ -37,17 +38,23 @@ class Factura
     def calcular_dscto()
         case @subtotal
         when 0..1000
+            @dscto_rango = 0
             @dscto = 0
         when 1000..5000
-            @dscto = @subtotal*0.03
+            @dscto_rango = 3
+            @dscto = @subtotal*@dscto_rango/100
         when 5000..7000
-            @dscto = @subtotal*0.05
+            @dscto_rango = 5
+            @dscto = @subtotal*@dscto_rango/100
         when 7000..10000
-            @dscto = @subtotal*0.07
+            @dscto_rango = 7
+            @dscto = @subtotal*@dscto_rango/100
         when 10000..50000
-            @dscto = @subtotal*0.10
-        when 50000..
-            @dscto = @subtotal*0.15
+            @dscto_rango = 10
+            @dscto = @subtotal*@dscto_rango/100
+        when 50000..Float::INFINITY
+            @dscto_rango = 15
+            @dscto = @subtotal*@dscto_rango/100
         end
     end
 
@@ -66,6 +73,7 @@ class Factura
 
     def mostrar_reporte()
         #puts "subtotal: #{@subtotal}, impuesto: #{@impuesto}, dscto: #{@dscto}, estado: #{@estado}"
+        puts "DTO(%#{@dscto_rango}) = $#{@dscto}"
         puts "Total = $#{@total}"
     end
 
