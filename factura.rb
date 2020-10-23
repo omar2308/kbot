@@ -23,10 +23,11 @@ class Factura
             @dscto = @subtotal*0.05
         when 7000..10000
             @dscto = @subtotal*0.07
-        when 10000..
+        when 10000..50000
             @dscto = @subtotal*0.10
+        when 50000..
+            @dscto = @subtotal*0.15
         end
-        puts "...dscto: #{@dscto}"
     end
 
     def resultado()
@@ -35,7 +36,7 @@ class Factura
             impuesto = @subtotal*@impuesto_porc
             calcular_dscto()
 
-            puts "subtotal: #{@subtotal}, impuesto: #{impuesto}, dscto: #{@dscto}"
+            #puts "subtotal: #{@subtotal}, impuesto: #{impuesto}, dscto: #{@dscto}"
             total = @subtotal + impuesto - @dscto
             puts "#{total}"
         else
