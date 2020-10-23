@@ -64,16 +64,24 @@ class Factura
         @total = @subtotal + @impuesto - @dscto
     end
 
+    def mostrar_reporte()
+        #puts "subtotal: #{@subtotal}, impuesto: #{@impuesto}, dscto: #{@dscto}, estado: #{@estado}"
+        puts "Total = $#{@total}"
+    end
+
+    def mostrar_error()
+        puts "Error: #{@msg_error}"
+    end
+
     def resultado()
         if (@calcular)
             calcular_subtotal()
             calcular_dscto()
             calcular_impuesto()
             calcular_total()
-            #puts "subtotal: #{@subtotal}, impuesto: #{@impuesto}, dscto: #{@dscto}, estado: #{@estado}"
-            puts "#{@total}"
+            mostrar_reporte()
         else
-            puts "Error: #{@msg_error}"
+            mostrar_error()
         end
     end
 end
