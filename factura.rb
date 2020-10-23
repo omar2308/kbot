@@ -1,5 +1,5 @@
 class Factura
-    IMPUESTOS_ESTADOS = {'CA' => 0.0825, 'UT' => 0.0685, 'NV' => 0.0800, 'TX' => 0.0625, 'AL' => 0.0400}
+    IMPUESTOS_ESTADOS = {'CA' => 8.25, 'UT' => 6.85, 'NV' => 8.00, 'TX' => 6.25, 'AL' => 4.00}
     def initialize(cantidad, precio, estado)
         @cantidad = cantidad
         @precio = precio
@@ -39,23 +39,18 @@ class Factura
         case @subtotal
         when 0..1000
             @dscto_rango = 0
-            @dscto = 0
         when 1000..5000
             @dscto_rango = 3
-            @dscto = @subtotal*@dscto_rango/100
         when 5000..7000
             @dscto_rango = 5
-            @dscto = @subtotal*@dscto_rango/100
         when 7000..10000
             @dscto_rango = 7
-            @dscto = @subtotal*@dscto_rango/100
         when 10000..50000
             @dscto_rango = 10
-            @dscto = @subtotal*@dscto_rango/100
         when 50000..Float::INFINITY
             @dscto_rango = 15
-            @dscto = @subtotal*@dscto_rango/100
         end
+        @dscto = @subtotal*@dscto_rango/100
     end
 
     def calcular_subtotal()
@@ -64,7 +59,7 @@ class Factura
 
     def calcular_impuesto()
         @impuesto_estado = IMPUESTOS_ESTADOS[@estado]
-        @impuesto = @subtotal*@impuesto_estado
+        @impuesto = @subtotal*@impuesto_estado/100
     end
 
     def calcular_total()
@@ -73,6 +68,7 @@ class Factura
 
     def mostrar_reporte()
         #puts "subtotal: #{@subtotal}, impuesto: #{@impuesto}, dscto: #{@dscto}, estado: #{@estado}"
+        puts "#{@estado}(%#{@impuesto_estado}) = $#{@impuesto}"
         puts "DTO(%#{@dscto_rango}) = $#{@dscto}"
         puts "Total = $#{@total}"
     end
