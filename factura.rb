@@ -1,12 +1,14 @@
 class Factura
+    IMPUESTOS_ESTADOS = {'CA' => 0.0825, 'UT' => 0.0685}
     def initialize(cantidad, precio, estado)
-        @impuesto_estado = 0
-        @precio = precio
         @cantidad = cantidad
+        @precio = precio
+        @estado = estado
+        
+        @impuesto_estado = 0
         @dscto= 0
         @subtotal = 0
         @total = 0
-        @estado = estado
         
         @msg_error = ""
         @calcular = validar_parametros(cantidad, precio, estado)
@@ -21,8 +23,8 @@ class Factura
             @msg_error = "Cantidad debe ser un numero entero"
         when !(is_number? precio)
             @msg_error = "Precio debe ser un numero entero"
-        when !(['CA'].include? estado)
-            @msg_error = "Solo se envia a CA"
+        when !(IMPUESTOS_ESTADOS.key? estado)
+            @msg_error = "Solo se envia a #{IMPUESTOS_ESTADOS.keys}"
         else
             result = true
         end
@@ -54,10 +56,7 @@ class Factura
     end
 
     def calcular_impuesto()
-        case @estado
-        when 'CA'
-            @impuesto_estado=0.0825
-        end
+        @impuesto_estado = IMPUESTOS_ESTADOS[@estado]
         @impuesto = @subtotal*@impuesto_estado
     end
 
@@ -71,7 +70,7 @@ class Factura
             calcular_dscto()
             calcular_impuesto()
             calcular_total()
-            #puts "subtotal: #{@subtotal}, impuesto: #{@impuesto}, dscto: #{@dscto}, estado: #{@estado}"
+            puts "subtotal: #{@subtotal}, impuesto: #{@impuesto}, dscto: #{@dscto}, estado: #{@estado}"
             puts "#{@total}"
         else
             puts "Error: #{@msg_error}"
