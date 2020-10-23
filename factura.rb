@@ -1,10 +1,10 @@
 class Factura
-    IMPUESTOS_ESTADOS = {'CA' => 0.0825, 'UT' => 0.0685}
+    IMPUESTOS_ESTADOS = {'CA' => 0.0825, 'UT' => 0.0685, 'NV' => 0.0800}
     def initialize(cantidad, precio, estado)
         @cantidad = cantidad
         @precio = precio
         @estado = estado
-        
+
         @impuesto_estado = 0
         @dscto= 0
         @subtotal = 0
