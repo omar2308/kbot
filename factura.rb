@@ -68,6 +68,7 @@ class Factura
 
     def mostrar_reporte()
         #puts "subtotal: #{@subtotal}, impuesto: #{@impuesto}, dscto: #{@dscto}, estado: #{@estado}"
+        puts "\# #{@cantidad} * #{@precio} = $#{@subtotal}"
         puts "#{@estado}(%#{@impuesto_estado}) = $#{@impuesto}"
         puts "DTO(%#{@dscto_rango}) = $#{@dscto}"
         puts "Total = $#{@total}"
