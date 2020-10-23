@@ -1,6 +1,6 @@
 # Historias Elephant Carpaccio
 
-## US-01
+## US-01 - 1 articulo, precio fijo $10, solo a CA, sin impuestos, dsctos
 La factura se emite para:
 - Un sólo articulo
 - Precio fijo=$10
@@ -8,7 +8,7 @@ La factura se emite para:
 - Sin impuesto
 - Sin descuento
 
-## US-02
+## US-02 - Se aplica impuesto de 8.25% por enviarse a CA
 La factura se emite para:
 - Un sólo articulo
 - Precio fijo=$10
@@ -16,7 +16,7 @@ La factura se emite para:
 - Se aplica impuesto fijo de 8.25%
 - Sin descuento
 
-## US-03
+## US-03 - Se recibe la cantidad
 La factura se emite para:
 - Se recibe la cantidad de articulos
 - Precio fijo=$10
