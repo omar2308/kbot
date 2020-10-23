@@ -1,7 +1,7 @@
 class Factura
-    def initialize(cantidad)
+    def initialize(cantidad, precio)
         @impuesto_porc = 0.0825
-        @precio = 10
+        @precio = precio.to_i
         @dscto= 0
         @subtotal = 0
 
@@ -46,5 +46,5 @@ class Factura
 end
 
 
-factura= Factura.new(ARGV[0])
+factura= Factura.new(ARGV[0], ARGV[1])
 factura.resultado
